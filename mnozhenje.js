@@ -5,27 +5,17 @@ const option1 = document.getElementById("option1"),
 var answer = 0;
 
 function generate_equation(){ 
-  var num1 = Math.floor(Math.random() * 10) + 1,
-      num2 = Math.floor(Math.random() * 10) + 1,
-      dummyAnswer1 = Math.floor(Math.random() * 10) / 10,
-      dummyAnswer2 = Math.floor(Math.random() * 10),
+  var num1 = Math.floor(Math.random() * 10),
+      num2 = Math.floor(Math.random() * 10),
+      dummyAnswer1 = Math.floor(Math.random() * 50),
+      dummyAnswer2 = Math.floor(Math.random() * 50),
       allAnswers = [],
       switchAnswers = [];
 
-  if(num1 > num2){
-    answer = eval(num1 / num2);
-    document.getElementById("num1").innerHTML = num1; 
-    document.getElementById("num2").innerHTML = num2;
-  }
-  else{
-    answer = eval(num2 / num1);
-    document.getElementById("num1").innerHTML = num2; 
-    document.getElementById("num2").innerHTML = num1;
-  } 
-
-  if(Number.isInteger(answer) == false){
-    answer = answer.toFixed(1);
-  }
+  answer = eval(num1 * num2);
+  
+  document.getElementById("num1").innerHTML = num1; 
+  document.getElementById("num2").innerHTML = num2; 
 
   allAnswers = [answer, dummyAnswer1, dummyAnswer2];
 
@@ -41,7 +31,8 @@ function generate_equation(){
 
 option1.addEventListener("click", function(){
     if(option1.innerHTML == answer){
-      generate_equation();
+        plusPoints();
+        generate_equation();
     }
     else{
       audio.play();
@@ -50,7 +41,8 @@ option1.addEventListener("click", function(){
 
 option2.addEventListener("click", function(){
     if(option2.innerHTML == answer){
-      generate_equation();
+        plusPoints();
+        generate_equation();
     }
     else{
       audio.play();
@@ -59,7 +51,8 @@ option2.addEventListener("click", function(){
 
 option3.addEventListener("click", function(){
     if(option3.innerHTML == answer){
-     generate_equation();
+        plusPoints();
+        generate_equation();
     }
     else{
       audio.play();
@@ -68,4 +61,11 @@ option3.addEventListener("click", function(){
 
 generate_equation()
 
+function plusPoints(){
+    points = document.getElementById("points").innerHTML;
+    console.log(points);
+    points = parseInt(points);
+    points+=2;
+    document.getElementById("points").innerHTML = points;
+}
 
