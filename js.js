@@ -85,7 +85,7 @@ function generateRandomAnswers(next){
     array.push(answer2);
     array.push(answer3);
 
-    if(array.includes(next)){ //if the right answer is already in the answers, do nothing
+    if(array.includes(next)){
         return;
     }
     else{
