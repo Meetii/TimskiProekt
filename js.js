@@ -8,6 +8,30 @@ const colors = ["#c40b0b",
 
 var divisors = [];
 
+function generateRandomNumber(min, max) {
+    return Math.floor(Math.random()*(max-min))+min;
+}
+
+function getHtmlName(){
+    var path = window.location.pathname;
+    var page = path.split("/").pop();
+    return page;
+}
+
+function plusPoints(){
+    let points = document.getElementById("points").innerHTML;
+    points = parseInt(points);
+    points+=2;
+    document.getElementById("points").innerHTML = points;
+}
+
+function numberOfTries(){
+    let tries = document.getElementById("tries").innerHTML;
+    tries = parseInt(tries);
+    tries++;
+    document.getElementById("tries").innerHTML = tries;
+}
+
 function getDivisorsOfANumber(n){
     divisors = [];
     for(var i=1; i<=n; i++){
@@ -18,16 +42,6 @@ function getDivisorsOfANumber(n){
     }
     console.log("The divisor array: "+divisors);
     return divisors;
-}
-
-function generateRandomNumber(min, max) {
-    return Math.floor(Math.random()*(max-min))+min;
-}
-
-function getHtmlName(){
-    var path = window.location.pathname;
-    var page = path.split("/").pop();
-    return page;
 }
 
 function generateEquation(){
@@ -59,14 +73,12 @@ function generateEquation(){
         if(number1 != 1){
             getDivisorsOfANumber(number1);
             var index = generateRandomNumber(0, getDivisorsOfANumber(number1).length);
-            console.log("index of a divisor: " + index);
             number2 = divisors[index];
-            console.log("the divisor: "+number2);
         }
         else{
             number2 = 1;
         }
-        return number1+"/"+number2;
+        return number1+":"+number2;
     }
 }
 
@@ -121,10 +133,12 @@ $(document).ready(function(){
         var answer3 = document.getElementById("answer3").innerHTML;
 
         if(this.id == "answer1"){
+            numberOfTries();
             if(answer1 == evaluateProblem()){
                 var eq = document.getElementById("mathProblem");
                 var result = generateEquation(); //ex: "6+2=", next math problem
                 eq.innerHTML = result;
+                result = result.replace(":", "/");
 
                 var next = getNextEquation(result); //next right answer
                 generateRandomAnswers(next);
@@ -143,10 +157,12 @@ $(document).ready(function(){
             }
         }
         if(this.id == "answer2"){
+            numberOfTries();
             if(answer2 == evaluateProblem()){
                 var eq = document.getElementById("mathProblem");
                 var result = generateEquation();
                 eq.innerHTML = result;
+                result = result.replace(":", "/");
 
                 var next = getNextEquation(result);
                 generateRandomAnswers(next);
@@ -165,10 +181,12 @@ $(document).ready(function(){
             }
         }
         if(this.id == "answer3"){
+            numberOfTries();
             if(answer3 == evaluateProblem()){
                 var eq = document.getElementById("mathProblem");
                 var result = generateEquation();
                 eq.innerHTML = result;
+                result = result.replace(":", "/");
 
                 var next = getNextEquation(result);
                 generateRandomAnswers(next);
@@ -191,15 +209,16 @@ $(document).ready(function(){
 });
 
 function evaluateProblem(){
-    var problem = document.getElementById("mathProblem").innerHTML;
+    var problem;
+    if(getHtmlName()=="delenje.html"){
+        problem = document.getElementById("mathProblem").innerHTML;
+        problem = problem.replace(":", "/");
+        console.log("PROBLEM: "+ problem);
+    }
+    else{
+        problem = document.getElementById("mathProblem").innerHTML;
+    }
     return eval(problem);
-}
-
-function plusPoints(){
-    points = document.getElementById("points").innerHTML;
-    points = parseInt(points);
-    points+=2;
-    document.getElementById("points").innerHTML = points;
 }
 
 function nextLevel(){
