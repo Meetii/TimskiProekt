@@ -55,13 +55,18 @@ a{
   box-shadow: 4px 5px 10px #686868;
 }
 
-.starDiv{
-  position: absolute;
-  top:100px;
-  right:0;
-}
+/*.starDiv{*/
+/*  position: absolute;*/
+/*  top:100px;*/
+/*  right:0;*/
+/*}*/
 
-#star{
-  height:100px;
-  width:180px;
+/*#star{*/
+/*  height:100px;*/
+/*  width:180px;*/
+/*}*/
+
+.categories{
+  font-size: 5vw;
+  font-weight: bolder;
 }

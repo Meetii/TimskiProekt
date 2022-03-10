@@ -213,7 +213,6 @@ function evaluateProblem(){
     if(getHtmlName()=="delenje.html"){
         problem = document.getElementById("mathProblem").innerHTML;
         problem = problem.replace(":", "/");
-        console.log("PROBLEM: "+ problem);
     }
     else{
         problem = document.getElementById("mathProblem").innerHTML;

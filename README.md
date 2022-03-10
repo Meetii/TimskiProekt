@@ -1,1 +1,1 @@
-# Math games for Kids :)
+Educational kids maths game
